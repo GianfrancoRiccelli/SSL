@@ -90,9 +90,20 @@ void listarIdentificadores(void);
 void masDe32Caracteres();
 
 
+FILE *yyin;
+#define largo 33
+
+typedef struct Identificador {
+		char nombre[largo];
+		int valor;
+} Identificador;
+
+Identificador buffer[1000]; 
+
+
 
 /* Line 189 of yacc.c  */
-#line 96 "pruebaBison.tab.c"
+#line 107 "pruebaBison.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -143,7 +154,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 22 "pruebaBison.y"
+#line 33 "pruebaBison.y"
 
    char* cadena;
    int num;
@@ -151,7 +162,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 155 "pruebaBison.tab.c"
+#line 166 "pruebaBison.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -163,7 +174,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 167 "pruebaBison.tab.c"
+#line 178 "pruebaBison.tab.c"
 
 #ifdef short
 # undef short
@@ -445,7 +456,7 @@ static const yytype_int8 yyrhs[] =
       18,     0,    -1,    19,    14,    -1,    12,    13,    -1,    12,
       20,    13,    -1,    21,    -1,    20,    21,    -1,    -1,    16,
       22,     3,    25,     4,    -1,    11,     7,    23,     8,     4,
-      -1,    10,     7,    24,     8,     4,    -1,    25,    -1,    23,
+      -1,    10,     7,    24,     8,     4,    -1,    16,    -1,    23,
        9,    16,    -1,    25,    -1,    24,     9,    25,    -1,    26,
       -1,    25,     5,    26,    -1,    25,     6,    26,    -1,    16,
       -1,    15,    -1,     7,    25,     8,    -1
@@ -454,9 +465,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    37,    37,    39,    40,    43,    44,    49,    49,    50,
-      51,    54,    55,    58,    59,    62,    63,    64,    69,    70,
-      71
+       0,    48,    48,    50,    51,    54,    55,    60,    60,    61,
+      62,    65,    66,    69,    70,    73,    74,    75,    80,    81,
+      82
 };
 #endif
 
@@ -506,7 +517,7 @@ static const yytype_uint8 yydefact[] =
 {
        0,     0,     0,     0,     0,     0,     3,     7,     0,     5,
        1,     2,     0,     0,     0,     4,     6,     0,    19,    18,
-       0,    13,    15,     0,    11,     0,     0,     0,     0,     0,
+       0,    13,    15,    11,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,    20,    10,    14,    16,    17,     9,
       12,     8
 };
@@ -514,25 +525,25 @@ static const yytype_uint8 yydefact[] =
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     8,     9,    14,    23,    20,    21,    22
+      -1,     2,     3,     8,     9,    14,    24,    20,    21,    22
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -14
+#define YYPACT_NINF -18
 static const yytype_int8 yypact[] =
 {
-      20,    -8,    11,    16,    24,    26,   -14,   -14,     3,   -14,
-     -14,   -14,    -6,    -6,    31,   -14,   -14,    -6,   -14,   -14,
-      -2,    19,   -14,    18,    19,    -6,    12,    32,    -6,    -6,
-      -6,    33,    22,    17,   -14,   -14,    19,   -14,   -14,   -14,
-     -14,   -14
+      -8,     2,    14,    16,    24,    25,   -18,   -18,     6,   -18,
+     -18,   -18,    -6,    17,    31,   -18,   -18,    -6,   -18,   -18,
+      -2,    15,   -18,   -18,    18,    -6,    -3,    32,    -6,    -6,
+      -6,    33,    22,    19,   -18,   -18,    15,   -18,   -18,   -18,
+     -18,   -18
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -14,   -14,   -14,   -14,    27,   -14,   -14,   -14,   -13,    -1
+     -18,   -18,   -18,   -18,    27,   -18,   -18,   -18,   -17,    -1
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -542,18 +553,18 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      24,    17,     4,     5,    26,     6,    27,    28,     7,    18,
-      19,    10,    33,     4,     5,    36,    15,    29,    30,     7,
-      34,    41,    29,    30,    29,    30,    31,    32,    37,    38,
-      11,    12,     1,    13,    25,    16,    35,    39,    40
+      26,    17,    29,    30,     1,    34,    27,    28,    33,    18,
+      19,    36,     4,     5,    10,     6,     4,     5,     7,    15,
+      29,    30,     7,    41,    29,    30,    31,    32,    37,    38,
+      11,    12,    13,    23,    25,    16,    35,    39,    40
 };
 
 static const yytype_uint8 yycheck[] =
 {
-      13,     7,    10,    11,    17,    13,     8,     9,    16,    15,
-      16,     0,    25,    10,    11,    28,    13,     5,     6,    16,
-       8,     4,     5,     6,     5,     6,     8,     9,    29,    30,
-      14,     7,    12,     7,     3,     8,     4,     4,    16
+      17,     7,     5,     6,    12,     8,     8,     9,    25,    15,
+      16,    28,    10,    11,     0,    13,    10,    11,    16,    13,
+       5,     6,    16,     4,     5,     6,     8,     9,    29,    30,
+      14,     7,     7,    16,     3,     8,     4,     4,    16
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -562,7 +573,7 @@ static const yytype_uint8 yystos[] =
 {
        0,    12,    18,    19,    10,    11,    13,    16,    20,    21,
        0,    14,     7,     7,    22,    13,    21,     7,    15,    16,
-      24,    25,    26,    23,    25,     3,    25,     8,     9,     5,
+      24,    25,    26,    16,    23,     3,    25,     8,     9,     5,
        6,     8,     9,    25,     8,     4,    25,    26,    26,     4,
       16,     4
 };
@@ -1378,140 +1389,140 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 37 "pruebaBison.y"
+#line 48 "pruebaBison.y"
     {exit(0);;}
     break;
 
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 39 "pruebaBison.y"
+#line 50 "pruebaBison.y"
     {exit(0);;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 40 "pruebaBison.y"
+#line 51 "pruebaBison.y"
     {exit(0);;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 43 "pruebaBison.y"
+#line 54 "pruebaBison.y"
     {;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 44 "pruebaBison.y"
+#line 55 "pruebaBison.y"
     {;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 49 "pruebaBison.y"
+#line 60 "pruebaBison.y"
     {printf("La longitud del identificador es: %d",yyleng); masDe32Caracteres();;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 49 "pruebaBison.y"
+#line 60 "pruebaBison.y"
     {asignar((yyvsp[(1) - (5)].cadena), (yyvsp[(3) - (5)].num));;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 50 "pruebaBison.y"
+#line 61 "pruebaBison.y"
     {;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 51 "pruebaBison.y"
+#line 62 "pruebaBison.y"
     {;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 54 "pruebaBison.y"
-    {leerIdentificador((yyvsp[(1) - (1)].num));;}
+#line 65 "pruebaBison.y"
+    {leer_id((yyvsp[(1) - (1)].cadena));;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 55 "pruebaBison.y"
-    {leerIdentificador((yyvsp[(3) - (3)].cadena));;}
+#line 66 "pruebaBison.y"
+    {leer_id((yyvsp[(3) - (3)].cadena));;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 58 "pruebaBison.y"
-    {escribirExpresion((yyvsp[(1) - (1)].num));;}
+#line 69 "pruebaBison.y"
+    {escribir_exp((yyvsp[(1) - (1)].num));;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 59 "pruebaBison.y"
-    {escribirExpresion((yyvsp[(3) - (3)].num));;}
+#line 70 "pruebaBison.y"
+    {escribir_exp((yyvsp[(3) - (3)].num));;}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 62 "pruebaBison.y"
+#line 73 "pruebaBison.y"
     {(yyval.num) = (yyvsp[(1) - (1)].num);;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 63 "pruebaBison.y"
+#line 74 "pruebaBison.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) + (yyvsp[(3) - (3)].num);;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 64 "pruebaBison.y"
+#line 75 "pruebaBison.y"
     {(yyval.num) = (yyvsp[(1) - (3)].num) - (yyvsp[(3) - (3)].num);;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 69 "pruebaBison.y"
-    {leerIdentificador((yyvsp[(1) - (1)].cadena));;}
+#line 80 "pruebaBison.y"
+    {leer_id((yyvsp[(1) - (1)].cadena));;}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 70 "pruebaBison.y"
+#line 81 "pruebaBison.y"
     {printf("valores %d %d",atoi(yytext),(yyvsp[(1) - (1)].num)); (yyval.num) = (yyvsp[(1) - (1)].num);;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 71 "pruebaBison.y"
+#line 82 "pruebaBison.y"
     {;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1515 "pruebaBison.tab.c"
+#line 1526 "pruebaBison.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1723,17 +1734,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 73 "pruebaBison.y"
-
-FILE *yyin;
-#define largo 33
-
-typedef struct Identificador {
-		char nombre[largo];
-		int valor;
-} Identificador;
-
-Identificador buffer[1000]; 
+#line 84 "pruebaBison.y"
 
 void masDe32Caracteres(){
   if (yyleng>32) yyerror("Error semantico, el identificador excede el limite de caracteres por identificador (32)");
@@ -1778,7 +1779,7 @@ int buscar(char* nombre){
   return 0;
 }
 
-listarIdentificadores(){
+void listarIdentificadores(){
   int i;
   for (i=0; i<tope; i++){
     printf("%s\n",buffer[i].nombre);

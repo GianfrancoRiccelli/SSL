@@ -18,6 +18,7 @@ int buscar(char* nombre);
 void listarIdentificadores(void);
 void masDe32Caracteres();
 
+
 FILE *yyin;
 #define largo 33
 
@@ -61,12 +62,12 @@ sentencia: ID {printf("La longitud del identificador es: %d",yyleng); masDe32Car
 |ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PYCOMA   {}
 ;
 
-listaIdentificadores: expresion          {leerIdentificador($1);}
-|listaIdentificadores COMA ID            {leerIdentificador($3);}
+listaIdentificadores: ID         {leer_id($1);}
+|listaIdentificadores COMA ID            {leer_id($3);}
 ;
 
-listaExpresiones: expresion                            {escribirExpresion($1);}
-|listaExpresiones COMA expresion                       {escribirExpresion($3);}
+listaExpresiones: expresion                            {escribir_exp($1);}
+|listaExpresiones COMA expresion                       {escribir_exp($3);}
 ;
 
 expresion: primaria                                        {$$ = $1;}
@@ -76,7 +77,7 @@ expresion: primaria                                        {$$ = $1;}
 ; 
 
 
-primaria: ID                                              {leerIdentificador($1);}
+primaria: ID                                              {leer_id($1);}
 |CONSTANTE                                                {printf("valores %d %d",atoi(yytext),$1); $$ = $1;}
 |PARENIZQUIERDO expresion PARENDERECHO                    {}
 ;
@@ -124,7 +125,7 @@ int buscar(char* nombre){
   return 0;
 }
 
-listarIdentificadores(){
+void listarIdentificadores(){
   int i;
   for (i=0; i<tope; i++){
     printf("%s\n",buffer[i].nombre);
