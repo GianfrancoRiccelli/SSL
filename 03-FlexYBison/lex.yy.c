@@ -286,10 +286,10 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 #define YY_END_OF_BUFFER 17
 static yyconst short int yy_accept[42] =
     {   0,
-        0,    0,   17,   15,    4,   16,    7,    8,    9,    6,
-       10,    2,   15,    5,    3,    3,    3,    3,    3,    4,
-        2,    1,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        0,    0,   17,   15,    8,   16,   11,   12,   13,   10,
+       14,    6,   15,    9,    7,    7,    7,    7,    7,    8,
+        6,    5,    7,    7,    7,    7,    7,    7,    2,    7,
+        7,    7,    7,    3,    7,    7,    7,    1,    7,    4,
         0
     } ;
 
@@ -390,8 +390,10 @@ char *yytext;
 #line 2 "pruebaFlex.l"
 	#include <stdio.h>
 	#include <stdlib.h>
-	#include "y.tab.h"
-#line 395 "lex.yy.c"
+	#include "pruebaBison.tab.h"
+	
+	void errorLexico();
+#line 397 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -542,9 +544,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 13 "pruebaFlex.l"
+#line 15 "pruebaFlex.l"
 
-#line 548 "lex.yy.c"
+#line 550 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -629,85 +631,85 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 14 "pruebaFlex.l"
-{return (ASIGNACION);}
+#line 16 "pruebaFlex.l"
+{return (INICIO);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "pruebaFlex.l"
-{yylval.num=atoi(yytext);return (CONSTANTE);}
+#line 17 "pruebaFlex.l"
+{return (FIN);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 16 "pruebaFlex.l"
-{return (ID);}
+#line 18 "pruebaFlex.l"
+{return (LEER);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 17 "pruebaFlex.l"
-{/omitir/}
+#line 19 "pruebaFlex.l"
+{return (ESCRIBIR);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 18 "pruebaFlex.l"
-{return (PYCOMA);}
+#line 20 "pruebaFlex.l"
+{return (ASIGNACION);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 "pruebaFlex.l"
-{return (COMA);}
+#line 21 "pruebaFlex.l"
+{yylval.num=atoi(yytext);return (CONSTANTE);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 20 "pruebaFlex.l"
-{return (PARENIZQUIERDO);}
+#line 22 "pruebaFlex.l"
+{return (ID);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 21 "pruebaFlex.l"
-{return (PARENDERECHO);}
+#line 23 "pruebaFlex.l"
+{}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 22 "pruebaFlex.l"
-{return (SUMA);}
+#line 24 "pruebaFlex.l"
+{return (PYCOMA);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 23 "pruebaFlex.l"
-{return (RESTA);}
+#line 25 "pruebaFlex.l"
+{return (COMA);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 24 "pruebaFlex.l"
-{return (INICIO);}
+#line 26 "pruebaFlex.l"
+{return (PARENIZQUIERDO);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 25 "pruebaFlex.l"
-{return (FIN);}
+#line 27 "pruebaFlex.l"
+{return (PARENDERECHO);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 26 "pruebaFlex.l"
-{return (LEER);}
+#line 28 "pruebaFlex.l"
+{return (SUMA);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 27 "pruebaFlex.l"
-{return (ESCRIBIR);}
+#line 29 "pruebaFlex.l"
+{return (RESTA);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 28 "pruebaFlex.l"
+#line 30 "pruebaFlex.l"
 {errorLexico();}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 29 "pruebaFlex.l"
+#line 31 "pruebaFlex.l"
 ECHO;
 	YY_BREAK
-#line 711 "lex.yy.c"
+#line 713 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1593,9 +1595,8 @@ int main()
 	return 0;
 	}
 #endif
-#line 29 "pruebaFlex.l"
+#line 31 "pruebaFlex.l"
 
-
-void errorLexico(void){
+void errorLexico(){
     printf("Error Lexico: se ha ingresado un caracter invalido (%s)\n", yytext);
 }

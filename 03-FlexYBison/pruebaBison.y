@@ -2,19 +2,40 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <math.h>
+#include <string.h>
+
 extern char *yytext;
 extern int yyleng;
 extern int yylex(void);
 extern void yyerror(char*);
 int variable=0;
+
+int tope = 0; 
+void leer_id(char* nombre);
+void escribir_exp(int valor);
+void asignar(char* nombre, int valor);
+int buscar(char* nombre);
+void listarIdentificadores(void);
+void masDe32Caracteres();
+
+FILE *yyin;
+#define largo 33
+
+typedef struct Identificador {
+		char nombre[largo];
+		int valor;
+} Identificador;
+
+Identificador buffer[1000]; 
+
 %}
 %union{
    char* cadena;
    int num;
 } 
-%token ASIGNACION PYCOMA SUMA RESTA PARENIZQUIERDO PARENDERECHO ID COMA ESCRIBIR LEER INICIO FIN FDT 
+%token ASIGNACION PYCOMA SUMA RESTA PARENIZQUIERDO PARENDERECHO COMA ESCRIBIR LEER INICIO FIN FDT 
 %token <num> CONSTANTE
-%token <cadena> ID sentencia
+%token <cadena> ID 
 %left   SUMA  RESTA	 COMA
 %right  ASIGNACION	
 
@@ -35,7 +56,7 @@ listaSentencias: sentencia {}
  
 
 
-sentencia: ID {printf("La longitud del identificador es: %d",yyleng); masDe32Caracteres();} ASIGNACION expresion PYCOMA    {asignar($1, $3);}
+sentencia: ID {printf("La longitud del identificador es: %d",yyleng); masDe32Caracteres();} ASIGNACION expresion PYCOMA    {asignar($1, $<num>3);}
 |LEER PARENIZQUIERDO listaIdentificadores PARENDERECHO PYCOMA   {}
 |ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PYCOMA   {}
 ;
@@ -60,24 +81,8 @@ primaria: ID                                              {leerIdentificador($1)
 |PARENIZQUIERDO expresion PARENDERECHO                    {}
 ;
 %%
-FILE *yyin;
-#define largo 33
-
-typedef struct Identificador {
-		char nombre[largo];
-		int valor;
-} Identificador;
-
-Identificador buffer[1000]; 
-int tope = 0; 
-void leer_id(char* nombre);
-void escribir_exp(int valor);
-void asignar(char* nombre, int valor);
-int buscar(char* nombre);
-void listarIdentificadores (void);
-
 void masDe32Caracteres(){
-  if (yyleng>32) yyerror("Error semantico, el identificador excede el limite de caracteres por identificador (32)")
+  if (yyleng>32) yyerror("Error semantico, el identificador excede el limite de caracteres por identificador (32)");
 }
 void yyerror (char *s){
 printf ("%s\n",s);
@@ -86,7 +91,7 @@ int yywrap()  {
   return 1;  
 } 
 
-void leer_id(){
+void leer_id(char* nombre){
   int i;
   for (i=0; i<tope; i++){
     if (strcmp(buffer[i].nombre,yytext)==0){
@@ -97,19 +102,19 @@ void leer_id(){
   printf("Error semantico, identificador %s no declarado!\n",yytext);
 }
 
-void asignar(nombre, valor){
+void asignar(char* nombre, int valor){
   int i = buscar(nombre);
   if (i==0){
     strcpy(buffer[tope].nombre,nombre);
-    buffer[tope].valor=valor;
+    buffer[tope].valor = valor;
     tope++;
   }
   else{
-    buffer[i].valor=valor;
+    buffer[i].valor = valor;
   }
 }
 
-void buscar(nombre){
+int buscar(char* nombre){
   int i;
   for (i=0; i<tope; i++){
     if (strcmp(buffer[i].nombre,nombre)==0){
@@ -119,7 +124,7 @@ void buscar(nombre){
   return 0;
 }
 
-listaIdentificadores(){
+listarIdentificadores(){
   int i;
   for (i=0; i<tope; i++){
     printf("%s\n",buffer[i].nombre);

@@ -45,14 +45,14 @@
      RESTA = 261,
      PARENIZQUIERDO = 262,
      PARENDERECHO = 263,
-     ID = 264,
-     COMA = 265,
-     ESCRIBIR = 266,
-     LEER = 267,
-     INICIO = 268,
-     FIN = 269,
-     FDT = 270,
-     CONSTANTE = 271
+     COMA = 264,
+     ESCRIBIR = 265,
+     LEER = 266,
+     INICIO = 267,
+     FIN = 268,
+     FDT = 269,
+     CONSTANTE = 270,
+     ID = 271
    };
 #endif
 
@@ -63,7 +63,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 11 "pruebaBison.y"
+#line 22 "pruebaBison.y"
 
    char* cadena;
    int num;
