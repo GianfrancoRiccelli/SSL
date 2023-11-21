@@ -1,8 +1,8 @@
 inicio
-a:=7;
-b:=6;
-leer(a);
+a:=10;
+b:=5;
 leer(a,b);
+leer(a);
 escribir(8);
 leer(a);
 fin

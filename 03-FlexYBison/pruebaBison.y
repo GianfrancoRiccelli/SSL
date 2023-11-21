@@ -62,12 +62,12 @@ sentencia: ID {printf("La longitud del identificador es: %d",yyleng); masDe32Car
 |ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PYCOMA   {}
 ;
 
-listaIdentificadores: ID         {leer_id($1);}
-|listaIdentificadores COMA ID            {leer_id($3);}
+listaIdentificadores: listaIdentificadores COMA ID            {leer_id($3);}
+|ID         {leer_id($1);}
 ;
 
-listaExpresiones: expresion                            {escribir_exp($1);}
-|listaExpresiones COMA expresion                       {escribir_exp($3);}
+listaExpresiones: listaExpresiones COMA expresion                       {escribir_exp($3);}
+|expresion                            {escribir_exp($1);}
 ;
 
 expresion: primaria                                        {$$ = $1;}
@@ -79,15 +79,17 @@ expresion: primaria                                        {$$ = $1;}
 
 primaria: ID                                              {leer_id($1);}
 |CONSTANTE                                                {printf("valores %d %d",atoi(yytext),$1); $$ = $1;}
-|PARENIZQUIERDO expresion PARENDERECHO                    {}
+|PARENIZQUIERDO expresion PARENDERECHO                    {$$ = $2;}
 ;
 %%
 void masDe32Caracteres(){
   if (yyleng>32) yyerror("Error semantico, el identificador excede el limite de caracteres por identificador (32)");
 }
+
 void yyerror (char *s){
 printf ("%s\n",s);
 }
+
 int yywrap()  {
   return 1;  
 } 
@@ -127,6 +129,7 @@ int buscar(char* nombre){
 
 void listarIdentificadores(){
   int i;
+  printf("Identificadores:\n");
   for (i=0; i<tope; i++){
     printf("%s\n",buffer[i].nombre);
   }
@@ -139,6 +142,7 @@ void escribir_exp(int valor) {
 	scanf("%s", nombre);
 	asignar(nombre, valor);
 }
+
 int main(int argc, char* argv[]) {
 	int opcion = 0;
 	char archivo [50];

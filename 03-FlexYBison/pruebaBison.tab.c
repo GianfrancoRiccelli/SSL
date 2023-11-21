@@ -446,7 +446,7 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint8 yyprhs[] =
 {
        0,     0,     3,     6,     9,    13,    15,    18,    19,    25,
-      31,    37,    39,    43,    45,    49,    51,    55,    59,    61,
+      31,    37,    41,    43,    47,    49,    51,    55,    59,    61,
       63
 };
 
@@ -456,8 +456,8 @@ static const yytype_int8 yyrhs[] =
       18,     0,    -1,    19,    14,    -1,    12,    13,    -1,    12,
       20,    13,    -1,    21,    -1,    20,    21,    -1,    -1,    16,
       22,     3,    25,     4,    -1,    11,     7,    23,     8,     4,
-      -1,    10,     7,    24,     8,     4,    -1,    16,    -1,    23,
-       9,    16,    -1,    25,    -1,    24,     9,    25,    -1,    26,
+      -1,    10,     7,    24,     8,     4,    -1,    23,     9,    16,
+      -1,    16,    -1,    24,     9,    25,    -1,    25,    -1,    26,
       -1,    25,     5,    26,    -1,    25,     6,    26,    -1,    16,
       -1,    15,    -1,     7,    25,     8,    -1
 };
@@ -506,7 +506,7 @@ static const yytype_uint8 yyr1[] =
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     2,     2,     3,     1,     2,     0,     5,     5,
-       5,     1,     3,     1,     3,     1,     3,     3,     1,     1,
+       5,     3,     1,     3,     1,     1,     3,     3,     1,     1,
        3
 };
 
@@ -517,9 +517,9 @@ static const yytype_uint8 yydefact[] =
 {
        0,     0,     0,     0,     0,     0,     3,     7,     0,     5,
        1,     2,     0,     0,     0,     4,     6,     0,    19,    18,
-       0,    13,    15,    11,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    20,    10,    14,    16,    17,     9,
-      12,     8
+       0,    14,    15,    12,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    20,    10,    13,    16,    17,     9,
+      11,     8
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -1453,28 +1453,28 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 65 "pruebaBison.y"
-    {leer_id((yyvsp[(1) - (1)].cadena));;}
+    {leer_id((yyvsp[(3) - (3)].cadena));;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
 #line 66 "pruebaBison.y"
-    {leer_id((yyvsp[(3) - (3)].cadena));;}
+    {leer_id((yyvsp[(1) - (1)].cadena));;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
 #line 69 "pruebaBison.y"
-    {escribir_exp((yyvsp[(1) - (1)].num));;}
+    {escribir_exp((yyvsp[(3) - (3)].num));;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
 #line 70 "pruebaBison.y"
-    {escribir_exp((yyvsp[(3) - (3)].num));;}
+    {escribir_exp((yyvsp[(1) - (1)].num));;}
     break;
 
   case 15:
@@ -1516,7 +1516,7 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 82 "pruebaBison.y"
-    {;}
+    {(yyval.num) = (yyvsp[(2) - (3)].num);;}
     break;
 
 
@@ -1739,9 +1739,11 @@ yyreturn:
 void masDe32Caracteres(){
   if (yyleng>32) yyerror("Error semantico, el identificador excede el limite de caracteres por identificador (32)");
 }
+
 void yyerror (char *s){
 printf ("%s\n",s);
 }
+
 int yywrap()  {
   return 1;  
 } 
@@ -1781,6 +1783,7 @@ int buscar(char* nombre){
 
 void listarIdentificadores(){
   int i;
+  printf("Identificadores:\n");
   for (i=0; i<tope; i++){
     printf("%s\n",buffer[i].nombre);
   }
@@ -1793,10 +1796,12 @@ void escribir_exp(int valor) {
 	scanf("%s", nombre);
 	asignar(nombre, valor);
 }
+
 int main(int argc, char* argv[]) {
 	int opcion = 0;
 	char archivo [50];
 	if(argc == 1) {
+		system("clear");
 		printf("1) Escribir el nombre del archivo con codigo micro\n");
 		printf("2) Para escribir codigo micro\n");
 		scanf("%d", &opcion);
