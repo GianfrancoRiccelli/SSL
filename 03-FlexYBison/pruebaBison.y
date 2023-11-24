@@ -54,6 +54,11 @@ void verificarTamanioID(int tamanio){
   if(tamanio>32) yyerror("Se excedio el tamanio maximo de caracteres para un ID (32)");
 
 }
+
+void terminar(){
+  exit(0);
+}
+
 void yyerror (char *s){
 printf ("%s\n",s);
 }
