@@ -15,11 +15,11 @@ Fecha de entrega: 17/11/2023
 - Mail: egomezlousa@frba.utn.edu.ar
 - Legajo: 2036873
 - ----------------------------------------------------
-- Alumna: Tomás Federico Fiestas Escubilla
+- Alumno: Tomás Federico Fiestas Escubilla
 - Mail: tfiestasescubilla@frba.utn.edu.ar
 - Legajo: 2036198
 ------------------------------------------------------
-- Alumna: Gianfranco Riccelli
+- Alumno: Gianfranco Riccelli
 - Mail: griccelli@frba.utn.edu.ar
 - Legajo: 2039977
 ------------------------------------------------------
