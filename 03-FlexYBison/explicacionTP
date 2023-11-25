@@ -1,7 +1,0 @@
-Utilizamos las herramientas para compilar de la siguiente forma:
-
-bison -yd pruebaBison.y
-flex pruebaFlex.l
-gcc lex.yy.c y.tab.c -o ejecutable
-
-Basandonos en la gramatica sentatica y lexica de micro, agregandole rutinas semanticas para detectar cualquier tipo de error en la ejecucion del codigo.
