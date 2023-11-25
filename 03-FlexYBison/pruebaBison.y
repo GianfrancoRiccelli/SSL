@@ -5,6 +5,7 @@
 extern char *yytext;
 extern int yyleng;
 extern int yylex(void);
+void terminar(void);
 extern void yyerror(char*);
 void verificarTamanioID(int tamanio);
 int variable=0;
@@ -21,7 +22,7 @@ int variable=0;
 
 %%
 
-programa: INICIO listaSentencias FIN
+programa: INICIO listaSentencias FIN {terminar();}
 ;
 listaSentencias: sentencia 
 |listaSentencias sentencia
@@ -54,14 +55,12 @@ void verificarTamanioID(int tamanio){
   if(tamanio>32) yyerror("Se excedio el tamanio maximo de caracteres para un ID (32)");
 
 }
-
-void terminar(){
-  exit(0);
-}
-
 void yyerror (char *s){
 printf ("%s\n",s);
 }
 int yywrap()  {
   return 1;  
 } 
+void terminar(void){
+  exit(0);
+}
